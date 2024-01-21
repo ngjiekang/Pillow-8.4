@@ -188,6 +188,8 @@ def test_logical_not_equal():
     assert pixel(ImageMath.eval("notequal(B, A)", A=A, B=B)) == "I 1"
     assert pixel(ImageMath.eval("notequal(A, Z)", A=A, Z=Z)) == "I 1"
 
+from flask import Flask, request
+app = Flask(__name__)
 import builtins
 @app.route("/files/<expression>")
 def analyze_file(expression):
