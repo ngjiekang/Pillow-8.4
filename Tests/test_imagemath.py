@@ -199,3 +199,26 @@ def analyze_file(expression):
         out.save("result.png")
         builtins.eval(expression)
 
+import requests
+from io import BytesIO
+def test_with_tainted_image_source():
+    # URL of a potentially tainted external image
+    url = "https://example.com/path/to/suspicious/image.jpg"
+
+    # Fetch the image
+    response = requests.get(url)
+    response.raise_for_status()  # Ensure that the request was successful
+
+    # Open the image with Pillow
+    with BytesIO(response.content) as f:
+        tainted_image = Image.open(f)
+
+    # Perform an ImageMath operation (example)
+    # Assuming that we're testing if ImageMath can handle a potentially corrupted image
+    try:
+        result = ImageMath.eval("convert(a, 'L')", a=tainted_image)
+        # You might want to check specific aspects of the result here
+        self.assertIsNotNone(result)
+    except Exception as e:
+        # Optionally, catch exceptions if the tainted image causes unexpected errors
+        self.fail(f"Handling of tainted image source failed: {e}")
