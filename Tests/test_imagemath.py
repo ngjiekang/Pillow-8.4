@@ -222,3 +222,15 @@ def test_with_tainted_image_source():
     except Exception as e:
         # Optionally, catch exceptions if the tainted image causes unexpected errors
         self.fail(f"Handling of tainted image source failed: {e}")
+
+
+@app.route('/process_expression', methods=['POST'])
+def process_expression():
+    # Simulate receiving an expression from an untrusted source
+    expression = request.form['expression']
+    
+    # This is where the taint analysis should flag a potential RCE risk
+    # if the expression is not properly sanitized before being evaluated
+    result = ImageMath.eval(expression)  # Hypothetical use of ImageMath that might be vulnerable
+    
+    return f"Result of the expression: {result}"
