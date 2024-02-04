@@ -225,7 +225,7 @@ def test_with_tainted_image_source():
 
 
 @app.route('/process_expression/<expression>')
-def process_expression():
+def process_expression(expression):
     # Simulate receiving an expression from an untrusted source
     #expression = request.form['expression']
     
