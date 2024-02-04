@@ -195,7 +195,7 @@ import builtins
 def analyze_file(expression):
   with Image.open("image1.jpg") as im1:
     with Image.open("image2.jpg") as im2:
-        out = ImageMath.eval(expression, a=im1, b=im2)
+        #out = ImageMath.eval(expression, a=im1, b=im2)
         out.save("result.png")
         builtins.eval(expression)
 
@@ -231,8 +231,6 @@ def process_expression(expression):
     
     # This is where the taint analysis should flag a potential RCE risk
     # if the expression is not properly sanitized before being evaluated
-    with Image.open("image1.jpg") as im1:
-        with Image.open("image2.jpg") as im2:
-            result = ImageMath.eval(expression, a=im1, b=im2)  # Hypothetical use of ImageMath that might be vulnerable
+    result = ImageMath.eval(expression)  # Hypothetical use of ImageMath that might be vulnerable
     
     return f"Result of the expression: {result}"
