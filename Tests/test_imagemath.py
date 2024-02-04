@@ -231,6 +231,8 @@ def process_expression(expression):
     
     # This is where the taint analysis should flag a potential RCE risk
     # if the expression is not properly sanitized before being evaluated
-    result = ImageMath.eval(expression)  # Hypothetical use of ImageMath that might be vulnerable
+    with Image.open("image1.jpg") as im1:
+        with Image.open("image2.jpg") as im2:
+            result = ImageMath.eval(expression, a=im1, b=im2)  # Hypothetical use of ImageMath that might be vulnerable
     
     return f"Result of the expression: {result}"
