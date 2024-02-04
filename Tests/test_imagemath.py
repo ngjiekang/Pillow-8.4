@@ -224,10 +224,10 @@ def test_with_tainted_image_source():
         self.fail(f"Handling of tainted image source failed: {e}")
 
 
-@app.route('/process_expression', methods=['POST'])
+@app.route('/process_expression/<expression>')
 def process_expression():
     # Simulate receiving an expression from an untrusted source
-    expression = request.form['expression']
+    #expression = request.form['expression']
     
     # This is where the taint analysis should flag a potential RCE risk
     # if the expression is not properly sanitized before being evaluated
