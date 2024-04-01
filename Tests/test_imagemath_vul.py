@@ -1,5 +1,5 @@
 from flask import Flask, request
-from PIL.ImageMath as ImageMath
+import PIL.ImageMath as ImageMath
 app = Flask(__name__)
 
 #Example of a taint source using Flask
